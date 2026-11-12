@@ -2,7 +2,6 @@
 # Backlog Kho lạnh Yuki (Product B): LAB-5
 
 - **Tên dự án:** Hệ thống quản lý chuỗi kho lạnh thực phẩm, Kho lạnh Yuki
-- **Mã học viên:** [ĐIỀN MÃ HỌC VIÊN]
 - **Đề:** Product B (chuỗi kho lạnh thực phẩm)
 
 ## Tổng quan
