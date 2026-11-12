@@ -1,0 +1,474 @@
+id,level,epic,parent,title,body,story_point,hours,role,assignee,sprint,priority,constraint,labels,status
+E1,Epic,E1,,Nền tảng và danh mục (Master),"R1, R5: ngưỡng 3 dải nhiệt và thỏa thuận khách x SKU là dữ liệu cấu hình
+
+**SP:** 33 · **Giờ ước lượng:** 61",33,61,,,,,,epic:E1;type:epic,Todo
+E1-T01,Task,E1,E1,"Thiết lập repo, CI cơ bản, hai môi trường (thử nghiệm và thật)","Repo, pipeline build chạy xanh, hai database tách biệt
+
+**SP:** 3 · **Giờ ước lượng:** 6
+**Nguồn LAB-4:** Kiến trúc mục 8",3,6,BE,BE-1,Sprint 1,Must,,epic:E1;type:task;role:be;sprint-1;priority:must,Done
+E1-T02,Task,E1,E1,"Xác thực và gán vai trò (role_code ROLE-001..008), middleware kiểm quyền ở server","Gọi API ghi không đúng vai trò trả E42; đăng nhập theo tài khoản cá nhân
+
+**SP:** 5 · **Giờ ước lượng:** 8
+**Nguồn LAB-4:** Kiến trúc mục 7
+**Phụ thuộc:** E1-T01",5,8,BE,BE-1,Sprint 1,Must,,epic:E1;type:task;role:be;sprint-1;priority:must,Done
+E1-T03,Task,E1,E1,"Migration schema danh mục: sku, customer, supplier, location, enum","Migration chạy lặp lại được; khớp bảng đã có ở LAB-2
+
+**SP:** 3 · **Giờ ước lượng:** 5
+**Nguồn LAB-4:** Database diagram mục 3
+**Phụ thuộc:** E1-T01",3,5,BE,BE-2,Sprint 1,Must,,epic:E1;type:task;role:be;sprint-1;priority:must,Done
+E1-T04,Task,E1,E1,"Màn quản lý SKU (expiry_type, trace_lane, temp_band)","Tạo, sửa SKU; expiry_type bắt buộc chọn
+
+**SP:** 3 · **Giờ ước lượng:** 6
+**Nguồn LAB-4:** Screen spec
+**Phụ thuộc:** E1-T03
+**Ràng buộc đặc thù:** R3",3,6,FE,FE-1,Sprint 1,Must,R3,epic:E1;type:task;role:fe;sprint-1;priority:must;constraint:expiry-types,Done
+E1-T05,Task,E1,E1,"Màn quản lý khách hàng, nhà cung cấp, vị trí (cờ cách ly)","CRUD ba danh mục; vị trí có cờ is_quarantine
+
+**SP:** 3 · **Giờ ước lượng:** 6
+**Nguồn LAB-4:** Screen spec
+**Phụ thuộc:** E1-T03",3,6,FE,FE-1,Sprint 1,Must,,epic:E1;type:task;role:fe;sprint-1;priority:must,Done
+E1-T06,Task,E1,E1,Cấu hình ngưỡng nhiệt 3 dải có effective_from (API và kiểm trùng hiệu lực),"Ngưỡng đổi theo ngày; không trùng (band, effective_from)
+
+**SP:** 3 · **Giờ ước lượng:** 6
+**Nguồn LAB-4:** ADR-003
+**Phụ thuộc:** E1-T03
+**Ràng buộc đặc thù:** R1",3,6,BE,BE-2,Sprint 1,Must,R1,epic:E1;type:task;role:be;sprint-1;priority:must;constraint:3-temperature-bands,Done
+E1-T07,Task,E1,E1,Cấu hình thỏa thuận khách x SKU (delivery_window_rule NULL là chưa cấu hình),"NULL không bị tự mặc định; có khoảng hiệu lực
+
+**SP:** 5 · **Giờ ước lượng:** 8
+**Nguồn LAB-4:** ADR-004
+**Phụ thuộc:** E1-T03
+**Ràng buộc đặc thù:** R5",5,8,BE,BE-2,Sprint 1,Must,R5,epic:E1;type:task;role:be;sprint-1;priority:must;constraint:delivery-window,In Progress
+E1-T07-S1,Subtask,E1,E1-T07,API thỏa thuận khách x SKU có hiệu lực,"API thỏa thuận khách x SKU có hiệu lực
+
+**SP:** 2 · **Giờ ước lượng:** 3
+**Nguồn LAB-4:** ADR-004
+**Ràng buộc đặc thù:** R5",2,3,BE,BE-2,Sprint 1,Must,R5,epic:E1;type:subtask;role:be;sprint-1;priority:must;constraint:delivery-window,In Progress
+E1-T07-S2,Subtask,E1,E1-T07,Ngữ nghĩa NULL và validation,"Ngữ nghĩa NULL và validation
+
+**SP:** 2 · **Giờ ước lượng:** 3
+**Nguồn LAB-4:** ADR-004
+**Ràng buộc đặc thù:** R5",2,3,BE,BE-2,Sprint 1,Must,R5,epic:E1;type:subtask;role:be;sprint-1;priority:must;constraint:delivery-window,In Progress
+E1-T07-S3,Subtask,E1,E1-T07,Màn cấu hình,"Màn cấu hình
+
+**SP:** 1 · **Giờ ước lượng:** 2
+**Nguồn LAB-4:** ADR-004
+**Ràng buộc đặc thù:** R5",1,2,BE,BE-2,Sprint 1,Must,R5,epic:E1;type:subtask;role:be;sprint-1;priority:must;constraint:delivery-window,In Progress
+E1-T08,Task,E1,E1,"Dữ liệu mẫu khớp RFP: SKU hạn ngon nhất và tiêu thụ, khách, hợp đồng, ngưỡng","Seed chạy được; có ca NULL hợp đồng và ca đảo hạn
+
+**SP:** 2 · **Giờ ước lượng:** 4
+**Nguồn LAB-4:** RFP
+**Ràng buộc đặc thù:** R3, R5",2,4,QA,QA-1,Sprint 1,Must,"R3, R5",epic:E1;type:task;role:qa;sprint-1;priority:must;constraint:expiry-types;constraint:delivery-window,Done
+E1-T09,Task,E1,E1,[Phát sinh] Xử lý dữ liệu hợp đồng thiếu (QA-008): quy trình bổ sung và báo cáo,"Danh sách cặp khách x SKU chưa cấu hình xuất được
+
+**SP:** 3 · **Giờ ước lượng:** 6
+**Nguồn LAB-4:** LAB-1 QA-008
+**Phụ thuộc:** E1-T07
+**Ràng buộc đặc thù:** R5",3,6,BE,BE-2,Sprint 1,Must,R5,epic:E1;type:task;role:be;sprint-1;priority:must;constraint:delivery-window,Done
+E1-T10,Task,E1,E1,"Khung giao diện chung: layout, điều hướng, thông báo lỗi E01..E43","Bộ thông báo lỗi dùng chung mọi màn
+
+**SP:** 3 · **Giờ ước lượng:** 6
+**Nguồn LAB-4:** Screen spec mục 0",3,6,FE,FE-1,Sprint 1,Must,,epic:E1;type:task;role:fe;sprint-1;priority:must,Done
+E2,Epic,E2,,Nhập kho (Receiving),"R1, R6: so ngưỡng nhiệt khi nhận, truy xuất bắt buộc gạo và bò
+
+**SP:** 26 · **Giờ ước lượng:** 45",26,45,,,,,,epic:E2;type:epic,Todo
+E2-T01,Task,E2,E2,API phiếu nhập và dòng nhập (validation field S1),"Tạo phiếu nhập hợp lệ; sai trả đúng mã lỗi
+
+**SP:** 5 · **Giờ ước lượng:** 8
+**Nguồn LAB-4:** Screen spec S1
+**Phụ thuộc:** E1-T03",5,8,BE,BE-1,Sprint 1,Must,,epic:E2;type:task;role:be;sprint-1;priority:must,In Progress
+E2-T02,Task,E2,E2,"So nhiệt độ khi nhận với ngưỡng hiệu lực, luồng cách ly hoặc từ chối kèm lý do","Nhiệt độ ngoài ngưỡng bắt buộc chọn xử lý và lý do (CHECK ở database)
+
+**SP:** 5 · **Giờ ước lượng:** 8
+**Nguồn LAB-4:** Screen spec S1
+**Phụ thuộc:** E1-T06
+**Ràng buộc đặc thù:** R1",5,8,BE,BE-1,Sprint 2,Must,R1,epic:E2;type:task;role:be;sprint-2;priority:must;constraint:3-temperature-bands,Todo
+E2-T02-S1,Subtask,E2,E2-T02,So nhiệt độ với ngưỡng hiệu lực,"So nhiệt độ với ngưỡng hiệu lực
+
+**SP:** 2 · **Giờ ước lượng:** 3
+**Nguồn LAB-4:** Screen spec S1
+**Ràng buộc đặc thù:** R1",2,3,BE,BE-1,Sprint 2,Must,R1,epic:E2;type:subtask;role:be;sprint-2;priority:must;constraint:3-temperature-bands,Todo
+E2-T02-S2,Subtask,E2,E2-T02,"Luồng cách ly, từ chối và CHECK lý do","Luồng cách ly, từ chối và CHECK lý do
+
+**SP:** 2 · **Giờ ước lượng:** 3
+**Nguồn LAB-4:** Screen spec S1
+**Ràng buộc đặc thù:** R1",2,3,BE,BE-1,Sprint 2,Must,R1,epic:E2;type:subtask;role:be;sprint-2;priority:must;constraint:3-temperature-bands,Todo
+E2-T02-S3,Subtask,E2,E2-T02,Test biên nhiệt độ,"Test biên nhiệt độ
+
+**SP:** 1 · **Giờ ước lượng:** 2
+**Nguồn LAB-4:** Screen spec S1
+**Ràng buộc đặc thù:** R1",1,2,BE,BE-1,Sprint 2,Must,R1,epic:E2;type:subtask;role:be;sprint-2;priority:must;constraint:3-temperature-bands,Todo
+E2-T03,Task,E2,E2,Kiểm mã truy xuất bắt buộc gạo và bò khi nhập (bò đúng 10 chữ số),"Thiếu mã khi MANDATORY chặn lưu, trả E09
+
+**SP:** 3 · **Giờ ước lượng:** 5
+**Nguồn LAB-4:** Screen spec S1
+**Ràng buộc đặc thù:** R6",3,5,BE,BE-2,Sprint 2,Must,R6,epic:E2;type:task;role:be;sprint-2;priority:must;constraint:traceability,Todo
+E2-T04,Task,E2,E2,Màn Nhập hàng (W1) gồm khối xử lý nhiệt độ ngoài ngưỡng,"Khớp wireframe W1; lỗi hiện đúng field
+
+**SP:** 5 · **Giờ ước lượng:** 8
+**Nguồn LAB-4:** Wireframe W1
+**Phụ thuộc:** E2-T01
+**Ràng buộc đặc thù:** R1",5,8,FE,FE-1,Sprint 1,Must,R1,epic:E2;type:task;role:fe;sprint-1;priority:must;constraint:3-temperature-bands,In Progress
+E2-T05,Task,E2,E2,Kiểm vị trí cùng dải nhiệt và sức chứa khi nhập,"Sai dải trả E07, hết chỗ trả E08
+
+**SP:** 2 · **Giờ ước lượng:** 4
+**Nguồn LAB-4:** Screen spec S1
+**Ràng buộc đặc thù:** R1",2,4,BE,BE-2,Sprint 2,Should,R1,epic:E2;type:task;role:be;sprint-2;priority:should;constraint:3-temperature-bands,Todo
+E2-T06,Task,E2,E2,"Màn duyệt, cách ly, từ chối lô cho QC","QC chuyển trạng thái đúng sơ đồ vòng đời
+
+**SP:** 3 · **Giờ ước lượng:** 6
+**Nguồn LAB-4:** Kiến trúc mục 5.2
+**Phụ thuộc:** E3-T01",3,6,FE,FE-1,Sprint 2,Must,,epic:E2;type:task;role:fe;sprint-2;priority:must,Todo
+E2-T07,Task,E2,E2,"Kiểm thử luồng nhập (biên nhiệt độ, thiếu truy xuất, trùng số lô)","Bộ test tự động chạy trong CI
+
+**SP:** 3 · **Giờ ước lượng:** 6
+**Nguồn LAB-4:** Screen spec S1
+**Ràng buộc đặc thù:** R1, R6",3,6,QA,QA-1,Sprint 2,Must,"R1, R6",epic:E2;type:task;role:qa;sprint-2;priority:must;constraint:3-temperature-bands;constraint:traceability,Todo
+E3,Epic,E3,,Tồn kho và vòng đời lô (Inventory),"R3: hai loại hạn, trạng thái lô, job quá hạn
+
+**SP:** 21 · **Giờ ước lượng:** 36",21,36,,,,,,epic:E3;type:epic,Todo
+E3-T01,Task,E3,E3,Mô hình trạng thái lô và chuyển trạng thái hợp lệ,"Chuyển sai trạng thái bị từ chối; có audit
+
+**SP:** 5 · **Giờ ước lượng:** 8
+**Nguồn LAB-4:** Kiến trúc mục 5.2
+**Phụ thuộc:** E1-T03
+**Ràng buộc đặc thù:** R3",5,8,BE,BE-1,Sprint 1,Must,R3,epic:E3;type:task;role:be;sprint-1;priority:must;constraint:expiry-types,Done
+E3-T02,Task,E3,E3,"API tồn kho theo dải, sản phẩm, trạng thái","Lọc và phân trang đúng; sắp theo hạn
+
+**SP:** 3 · **Giờ ước lượng:** 5
+**Nguồn LAB-4:** Screen spec S2
+**Phụ thuộc:** E3-T01",3,5,BE,BE-1,Sprint 1,Must,,epic:E3;type:task;role:be;sprint-1;priority:must,Todo
+E3-T03,Task,E3,E3,"Màn Tồn kho (W2): cột Loại hạn tách riêng, nhãn tình trạng","Nhãn QUÁ HẠN, CÁCH LY, GẦN HẠN, CÒN HẠN đúng ưu tiên
+
+**SP:** 5 · **Giờ ước lượng:** 8
+**Nguồn LAB-4:** Wireframe W2
+**Phụ thuộc:** E3-T02
+**Ràng buộc đặc thù:** R3",5,8,FE,FE-1,Sprint 1,Must,R3,epic:E3;type:task;role:fe;sprint-1;priority:must;constraint:expiry-types,Todo
+E3-T04,Task,E3,E3,"Job nền: chuyển lô quá hạn sang EXPIRED, danh sách gần hạn","Chạy hằng ngày và hằng giờ; chỉ đổi trạng thái, không xóa
+
+**SP:** 3 · **Giờ ước lượng:** 6
+**Nguồn LAB-4:** Kiến trúc mục 6.5
+**Phụ thuộc:** E3-T01
+**Ràng buộc đặc thù:** R3",3,6,BE,BE-2,Sprint 2,Must,R3,epic:E3;type:task;role:be;sprint-2;priority:must;constraint:expiry-types,Todo
+E3-T05,Task,E3,E3,"Hủy lô: hộp thoại lý do, quyền QC và Quản lý","Chỉ lô quá hạn, bị từ chối hoặc EXPIRED mới hủy được (E43)
+
+**SP:** 3 · **Giờ ước lượng:** 5
+**Nguồn LAB-4:** Screen spec S2
+**Phụ thuộc:** E3-T01",3,5,BE,BE-1,Sprint 2,Should,,epic:E3;type:task;role:be;sprint-2;priority:should,Todo
+E3-T06,Task,E3,E3,Kiểm thử trạng thái lô và job hết hạn,"Test cho mọi chuyển trạng thái và mốc hết hạn
+
+**SP:** 2 · **Giờ ước lượng:** 4
+**Nguồn LAB-4:** Kiến trúc mục 5.2
+**Ràng buộc đặc thù:** R3",2,4,QA,QA-1,Sprint 2,Must,R3,epic:E3;type:task;role:qa;sprint-2;priority:must;constraint:expiry-types,Todo
+E4,Epic,E4,,Xuất hàng và kiểm lô (Shipping),"R3, R4, R5, R6: kiểm lô V1 đến V5, 日付逆転, hạn giao 1/3 và 1/2
+
+**SP:** 41 · **Giờ ước lượng:** 68",41,68,,,,,,epic:E4;type:epic,Todo
+E4-T01,Task,E4,E4,"Phiếu xuất và dòng đơn, trạng thái đơn (DRAFT, ALLOCATED, BUSINESS_REVIEW, CANCELLED)","Tạo phiếu theo khách và SKU; đơn thiếu hợp đồng vào BUSINESS_REVIEW
+
+**SP:** 3 · **Giờ ước lượng:** 6
+**Nguồn LAB-4:** Screen spec S3
+**Phụ thuộc:** E1-T07
+**Ràng buộc đặc thù:** R5",3,6,BE,BE-2,Sprint 1,Must,R5,epic:E4;type:task;role:be;sprint-1;priority:must;constraint:delivery-window,In Progress
+E4-T02,Task,E4,E4,Engine cấp phát bước V1: lô phải ở trạng thái sẵn sàng,"Lô không sẵn sàng bị loại, trả E20
+
+**SP:** 2 · **Giờ ước lượng:** 3
+**Nguồn LAB-4:** Kiến trúc mục 6.2
+**Phụ thuộc:** E3-T01",2,3,BE,BE-2,Sprint 1,Must,,epic:E4;type:task;role:be;sprint-1;priority:must,Done
+E4-T03,Task,E4,E4,"Bước V2: hạn theo loại hạn (tiêu thụ chặn tuyệt đối, ngon nhất cần ngoại lệ)","Quá hạn trả E21 hoặc E22 đúng loại
+
+**SP:** 3 · **Giờ ước lượng:** 6
+**Nguồn LAB-4:** ADR-004
+**Phụ thuộc:** E4-T02
+**Ràng buộc đặc thù:** R3",3,6,BE,BE-2,Sprint 1,Must,R3,epic:E4;type:task;role:be;sprint-1;priority:must;constraint:expiry-types,In Progress
+E4-T04,Task,E4,E4,"Bước V3: 日付逆転禁止, so theo lịch sử giao của đúng cặp khách x SKU","Lô cũ hơn lô đã giao bị loại, trả E23; không so với hôm nay
+
+**SP:** 5 · **Giờ ước lượng:** 8
+**Nguồn LAB-4:** ADR-002
+**Phụ thuộc:** E4-T03
+**Ràng buộc đặc thù:** R4",5,8,BE,BE-1,Sprint 1,Must,R4,epic:E4;type:task;role:be;sprint-1;priority:must;constraint:date-reversal,Todo
+E4-T04-S1,Subtask,E4,E4-T04,Truy vấn lô giao gần nhất theo cặp khách x SKU,"Truy vấn lô giao gần nhất theo cặp khách x SKU
+
+**SP:** 2 · **Giờ ước lượng:** 3
+**Nguồn LAB-4:** ADR-002
+**Ràng buộc đặc thù:** R4",2,3,BE,BE-1,Sprint 1,Must,R4,epic:E4;type:subtask;role:be;sprint-1;priority:must;constraint:date-reversal,Todo
+E4-T04-S2,Subtask,E4,E4-T04,So sánh hạn và trả lỗi E23,"So sánh hạn và trả lỗi E23
+
+**SP:** 2 · **Giờ ước lượng:** 3
+**Nguồn LAB-4:** ADR-002
+**Ràng buộc đặc thù:** R4",2,3,BE,BE-1,Sprint 1,Must,R4,epic:E4;type:subtask;role:be;sprint-1;priority:must;constraint:date-reversal,Todo
+E4-T04-S3,Subtask,E4,E4-T04,Unit test các ca biên,"Unit test các ca biên
+
+**SP:** 1 · **Giờ ước lượng:** 2
+**Nguồn LAB-4:** ADR-002
+**Ràng buộc đặc thù:** R4",1,2,BE,BE-1,Sprint 1,Must,R4,epic:E4;type:subtask;role:be;sprint-1;priority:must;constraint:date-reversal,Todo
+E4-T05,Task,E4,E4,"Khóa chống race khi xác nhận lấy hàng, trả E29 cho người đến sau","Hai phiên cùng xuất không cùng qua kiểm V3
+
+**SP:** 5 · **Giờ ước lượng:** 8
+**Nguồn LAB-4:** ADR-002, Kiến trúc mục 5.3
+**Phụ thuộc:** E4-T04
+**Ràng buộc đặc thù:** R4",5,8,BE,BE-1,Sprint 2,Must,R4,epic:E4;type:task;role:be;sprint-2;priority:must;constraint:date-reversal,Todo
+E4-T05-S1,Subtask,E4,E4-T05,Khóa theo cặp khách x SKU trong transaction,"Khóa theo cặp khách x SKU trong transaction
+
+**SP:** 2 · **Giờ ước lượng:** 3
+**Nguồn LAB-4:** ADR-002, Kiến trúc mục 5.3
+**Ràng buộc đặc thù:** R4",2,3,BE,BE-1,Sprint 2,Must,R4,epic:E4;type:subtask;role:be;sprint-2;priority:must;constraint:date-reversal,Todo
+E4-T05-S2,Subtask,E4,E4-T05,"Kiểm lại V1..V5 sau khóa, trả E29","Kiểm lại V1..V5 sau khóa, trả E29
+
+**SP:** 2 · **Giờ ước lượng:** 3
+**Nguồn LAB-4:** ADR-002, Kiến trúc mục 5.3
+**Ràng buộc đặc thù:** R4",2,3,BE,BE-1,Sprint 2,Must,R4,epic:E4;type:subtask;role:be;sprint-2;priority:must;constraint:date-reversal,Todo
+E4-T05-S3,Subtask,E4,E4-T05,Test hai phiên đồng thời,"Test hai phiên đồng thời
+
+**SP:** 1 · **Giờ ước lượng:** 2
+**Nguồn LAB-4:** ADR-002, Kiến trúc mục 5.3
+**Ràng buộc đặc thù:** R4",1,2,BE,BE-1,Sprint 2,Must,R4,epic:E4;type:subtask;role:be;sprint-2;priority:must;constraint:date-reversal,Todo
+E4-T06,Task,E4,E4,"Bước V4: hạn giao 1/3, 1/2, chỉ theo nhãn, NULL chuyển business review","Tính hạn giao từ ngày sản xuất và hạn; NULL không có lô qua
+
+**SP:** 5 · **Giờ ước lượng:** 8
+**Nguồn LAB-4:** ADR-004
+**Phụ thuộc:** E1-T07
+**Ràng buộc đặc thù:** R5",5,8,BE,BE-2,Sprint 2,Must,R5,epic:E4;type:task;role:be;sprint-2;priority:must;constraint:delivery-window,Todo
+E4-T06-S1,Subtask,E4,E4-T06,Tính hạn giao cho 1/3 và 1/2 từ ngày sản xuất và hạn,"Tính hạn giao cho 1/3 và 1/2 từ ngày sản xuất và hạn
+
+**SP:** 2 · **Giờ ước lượng:** 3
+**Nguồn LAB-4:** ADR-004
+**Ràng buộc đặc thù:** R5",2,3,BE,BE-2,Sprint 2,Must,R5,epic:E4;type:subtask;role:be;sprint-2;priority:must;constraint:delivery-window,Todo
+E4-T06-S2,Subtask,E4,E4-T06,Xử lý chỉ theo nhãn và NULL sang business review,"Xử lý chỉ theo nhãn và NULL sang business review
+
+**SP:** 2 · **Giờ ước lượng:** 3
+**Nguồn LAB-4:** ADR-004
+**Ràng buộc đặc thù:** R5",2,3,BE,BE-2,Sprint 2,Must,R5,epic:E4;type:subtask;role:be;sprint-2;priority:must;constraint:delivery-window,Todo
+E4-T06-S3,Subtask,E4,E4-T06,Unit test,"Unit test
+
+**SP:** 1 · **Giờ ước lượng:** 2
+**Nguồn LAB-4:** ADR-004
+**Ràng buộc đặc thù:** R5",1,2,BE,BE-2,Sprint 2,Must,R5,epic:E4;type:subtask;role:be;sprint-2;priority:must;constraint:delivery-window,Todo
+E4-T07,Task,E4,E4,Bước V5: kiểm truy xuất bắt buộc khi xuất,"Gạo hoặc bò thiếu truy xuất bị loại, trả E25
+
+**SP:** 2 · **Giờ ước lượng:** 3
+**Nguồn LAB-4:** Screen spec S3
+**Phụ thuộc:** E2-T03
+**Ràng buộc đặc thù:** R6",2,3,BE,BE-2,Sprint 2,Must,R6,epic:E4;type:task;role:be;sprint-2;priority:must;constraint:traceability,Todo
+E4-T08,Task,E4,E4,Lưu lý do loại từng lô theo bước (allocation_exclusion),"Mỗi lô bị loại có bước và lý do tiếng Nhật và Việt
+
+**SP:** 3 · **Giờ ước lượng:** 5
+**Nguồn LAB-4:** Database diagram mục 5
+**Phụ thuộc:** E4-T02",3,5,BE,BE-1,Sprint 2,Should,,epic:E4;type:task;role:be;sprint-2;priority:should,Todo
+E4-T09,Task,E4,E4,Ghi lịch sử giao bất biến (delivery_history) khi xác nhận,"Không có đường sửa hoặc xóa; chỉ mục theo cặp khách x SKU
+
+**SP:** 3 · **Giờ ước lượng:** 5
+**Nguồn LAB-4:** Database diagram mục 5
+**Phụ thuộc:** E4-T05
+**Ràng buộc đặc thù:** R4",3,5,BE,BE-2,Sprint 2,Must,R4,epic:E4;type:task;role:be;sprint-2;priority:must;constraint:date-reversal,Todo
+E4-T10,Task,E4,E4,Màn Xuất hàng / chọn lô (W3) hiện lý do chặn từng lô,"Khớp wireframe W3; lô chặn không có nút bỏ qua
+
+**SP:** 5 · **Giờ ước lượng:** 8
+**Nguồn LAB-4:** Wireframe W3
+**Phụ thuộc:** E4-T04
+**Ràng buộc đặc thù:** R3, R4, R5",5,8,FE,FE-1,Sprint 2,Must,"R3, R4, R5",epic:E4;type:task;role:fe;sprint-2;priority:must;constraint:expiry-types;constraint:date-reversal;constraint:delivery-window,Todo
+E4-T11,Task,E4,E4,"Bộ test tình huống đặc thù (đảo hạn, NULL hợp đồng, quá hạn, hai người cùng xuất)","Mỗi ràng buộc có ít nhất 2 ca test tự động
+
+**SP:** 5 · **Giờ ước lượng:** 8
+**Nguồn LAB-4:** Screen spec S3
+**Phụ thuộc:** E4-T06
+**Ràng buộc đặc thù:** R3, R4, R5",5,8,QA,QA-1,Sprint 2,Must,"R3, R4, R5",epic:E4;type:task;role:qa;sprint-2;priority:must;constraint:expiry-types;constraint:date-reversal;constraint:delivery-window,Todo
+E5,Epic,E5,,Lập lịch giao hàng và giờ lái xe (Scheduling),"R7: giới hạn giờ lái xe tải từ 2024 (tách riêng từng quy tắc)
+
+**SP:** 40 · **Giờ ước lượng:** 70",40,70,,,,,,epic:E5;type:epic,Todo
+E5-T12,Task,E5,E5,Làm rõ tham số giờ lái 2024 với khách và chốt quy tắc đầu vào cho H1..H4,"Biên bản chốt các tham số và nguồn quy định
+
+**SP:** 2 · **Giờ ước lượng:** 3
+**Nguồn LAB-4:** Kiến trúc R7
+**Ràng buộc đặc thù:** R7",2,3,QA,QA-1,Sprint 1,Must,R7,epic:E5;type:task;role:qa;sprint-1;priority:must;constraint:driver-hours-2024,In Progress
+E5-T01,Task,E5,E5,"Mô hình dữ liệu xe, tài xế, chuyến, điểm giao và migration","Migration chạy; khóa ngoại đúng thiết kế
+
+**SP:** 3 · **Giờ ước lượng:** 6
+**Nguồn LAB-4:** Database diagram mục 3
+**Phụ thuộc:** E1-T03
+**Ràng buộc đặc thù:** R7",3,6,BE,BE-1,Sprint 3,Must,R7,epic:E5;type:task;role:be;sprint-3;priority:must;constraint:driver-hours-2024,Todo
+E5-T02,Task,E5,E5,"Bảng tham số giờ lái (driver_rule, effective_from) và màn quản trị","Đổi tham số không cần deploy; có audit
+
+**SP:** 3 · **Giờ ước lượng:** 6
+**Nguồn LAB-4:** ADR-003
+**Phụ thuộc:** E5-T12
+**Ràng buộc đặc thù:** R7",3,6,BE,BE-2,Sprint 3,Must,R7,epic:E5;type:task;role:be;sprint-3;priority:must;constraint:driver-hours-2024,Todo
+E5-T03,Task,E5,E5,"Tính giờ kết thúc dự kiến từ di chuyển, xếp dỡ và nghỉ chèn","Công thức khớp screen spec S4
+
+**SP:** 3 · **Giờ ước lượng:** 5
+**Nguồn LAB-4:** Screen spec S4
+**Phụ thuộc:** E5-T01
+**Ràng buộc đặc thù:** R7",3,5,BE,BE-1,Sprint 3,Must,R7,epic:E5;type:task;role:be;sprint-3;priority:must;constraint:driver-hours-2024,Todo
+E5-T04,Task,E5,E5,Kiểm H1: giờ bị ràng buộc trong ngày không vượt giới hạn,"Vượt giới hạn trả E33, không lưu chuyến
+
+**SP:** 3 · **Giờ ước lượng:** 5
+**Nguồn LAB-4:** Screen spec S4
+**Phụ thuộc:** E5-T02
+**Ràng buộc đặc thù:** R7",3,5,BE,BE-2,Sprint 3,Must,R7,epic:E5;type:task;role:be;sprint-3;priority:must;constraint:driver-hours-2024,Todo
+E5-T05,Task,E5,E5,Kiểm H2: nghỉ tối thiểu giữa hai ca,"Chưa đủ nghỉ trả E34
+
+**SP:** 2 · **Giờ ước lượng:** 4
+**Nguồn LAB-4:** Screen spec S4
+**Phụ thuộc:** E5-T02
+**Ràng buộc đặc thù:** R7",2,4,BE,BE-1,Sprint 3,Must,R7,epic:E5;type:task;role:be;sprint-3;priority:must;constraint:driver-hours-2024,Todo
+E5-T06,Task,E5,E5,Kiểm H3: lái liên tục và chèn nghỉ bắt buộc,"Vượt thời gian lái liên tục trả E35 và tự chèn nghỉ
+
+**SP:** 3 · **Giờ ước lượng:** 6
+**Nguồn LAB-4:** Screen spec S4
+**Phụ thuộc:** E5-T03
+**Ràng buộc đặc thù:** R7",3,6,BE,BE-2,Sprint 3,Must,R7,epic:E5;type:task;role:be;sprint-3;priority:must;constraint:driver-hours-2024,Todo
+E5-T07,Task,E5,E5,Kiểm H4: giờ lũy kế tháng và năm,"Lũy kế vượt trả E36; tính đúng qua ranh giới tháng
+
+**SP:** 3 · **Giờ ước lượng:** 6
+**Nguồn LAB-4:** Screen spec S4
+**Phụ thuộc:** E5-T02
+**Ràng buộc đặc thù:** R7",3,6,BE,BE-1,Sprint 3,Should,R7,epic:E5;type:task;role:be;sprint-3;priority:should;constraint:driver-hours-2024,Todo
+E5-T08,Task,E5,E5,Kiểm xe đúng dải nhiệt và không trùng chuyến,"Sai dải trả E30, trùng trả E31, E32
+
+**SP:** 3 · **Giờ ước lượng:** 5
+**Nguồn LAB-4:** Screen spec S4
+**Phụ thuộc:** E5-T01
+**Ràng buộc đặc thù:** R1, R7",3,5,BE,BE-2,Sprint 3,Must,"R1, R7",epic:E5;type:task;role:be;sprint-3;priority:must;constraint:3-temperature-bands;constraint:driver-hours-2024,Todo
+E5-T09,Task,E5,E5,"Màn Lập lịch giao (W4): bảng chuyến, thanh giờ, điểm giao","Khớp wireframe W4 gồm dòng chi tiết điểm giao
+
+**SP:** 5 · **Giờ ước lượng:** 8
+**Nguồn LAB-4:** Wireframe W4
+**Phụ thuộc:** E5-T03
+**Ràng buộc đặc thù:** R7",5,8,FE,FE-1,Sprint 3,Must,R7,epic:E5;type:task;role:fe;sprint-3;priority:must;constraint:driver-hours-2024,Todo
+E5-T10,Task,E5,E5,"Gợi ý xử lý khi vượt giới hạn: đổi tài xế, cắt điểm giao, dời giờ","Mỗi gợi ý đưa chuyến về trạng thái đạt
+
+**SP:** 5 · **Giờ ước lượng:** 8
+**Nguồn LAB-4:** Screen spec S4
+**Phụ thuộc:** E5-T04
+**Ràng buộc đặc thù:** R7",5,8,BE,BE-1,Sprint 3,Should,R7,epic:E5;type:task;role:be;sprint-3;priority:should;constraint:driver-hours-2024,Todo
+E5-T10-S1,Subtask,E5,E5-T10,Gợi ý đổi tài xế còn đủ giờ,"Gợi ý đổi tài xế còn đủ giờ
+
+**SP:** 2 · **Giờ ước lượng:** 3
+**Nguồn LAB-4:** Screen spec S4
+**Ràng buộc đặc thù:** R7",2,3,BE,BE-1,Sprint 3,Should,R7,epic:E5;type:subtask;role:be;sprint-3;priority:should;constraint:driver-hours-2024,Todo
+E5-T10-S2,Subtask,E5,E5-T10,Gợi ý cắt điểm giao hoặc dời giờ,"Gợi ý cắt điểm giao hoặc dời giờ
+
+**SP:** 2 · **Giờ ước lượng:** 3
+**Nguồn LAB-4:** Screen spec S4
+**Ràng buộc đặc thù:** R7",2,3,BE,BE-1,Sprint 3,Should,R7,epic:E5;type:subtask;role:be;sprint-3;priority:should;constraint:driver-hours-2024,Todo
+E5-T10-S3,Subtask,E5,E5-T10,Hiển thị gợi ý trên giao diện,"Hiển thị gợi ý trên giao diện
+
+**SP:** 1 · **Giờ ước lượng:** 2
+**Nguồn LAB-4:** Screen spec S4
+**Ràng buộc đặc thù:** R7",1,2,BE,BE-1,Sprint 3,Should,R7,epic:E5;type:subtask;role:be;sprint-3;priority:should;constraint:driver-hours-2024,Todo
+E5-T11,Task,E5,E5,"Kiểm thử bộ quy tắc giờ lái (biên, qua nửa đêm, nhiều chuyến một ngày)","Mỗi quy tắc H1..H4 có ca biên
+
+**SP:** 5 · **Giờ ước lượng:** 8
+**Nguồn LAB-4:** Screen spec S4
+**Phụ thuộc:** E5-T06
+**Ràng buộc đặc thù:** R7",5,8,QA,QA-1,Sprint 3,Must,R7,epic:E5;type:task;role:qa;sprint-3;priority:must;constraint:driver-hours-2024,Todo
+E6,Epic,E6,,HACCP và truy xuất (Compliance),"R2, R6: nhật ký nhiệt độ chỉ thêm, hành động khắc phục, tra cứu truy xuất
+
+**SP:** 24 · **Giờ ước lượng:** 42",24,42,,,,,,epic:E6;type:epic,Todo
+E6-T01,Task,E6,E6,"Bảng nhật ký nhiệt độ và hành động khắc phục chỉ thêm (chặn UPDATE, DELETE ở database)","Thử sửa hoặc xóa bị database từ chối
+
+**SP:** 5 · **Giờ ước lượng:** 8
+**Nguồn LAB-4:** ADR-003, Kiến trúc mục 5.1
+**Ràng buộc đặc thù:** R2",5,8,BE,BE-1,Sprint 2,Must,R2,epic:E6;type:task;role:be;sprint-2;priority:must;constraint:haccp,Todo
+E6-T02,Task,E6,E6,"API ghi nhiệt độ, tự mở sự cố khi vượt ngưỡng","Vượt ngưỡng tạo sự cố OPEN
+
+**SP:** 3 · **Giờ ước lượng:** 6
+**Nguồn LAB-4:** Screen spec S5
+**Phụ thuộc:** E6-T01
+**Ràng buộc đặc thù:** R2",3,6,BE,BE-2,Sprint 2,Must,R2,epic:E6;type:task;role:be;sprint-2;priority:must;constraint:haccp,Todo
+E6-T03,Task,E6,E6,Màn Nhật ký nhiệt độ (W5) và form Ghi nhiệt độ,"Khớp wireframe W5
+
+**SP:** 5 · **Giờ ước lượng:** 8
+**Nguồn LAB-4:** Wireframe W5
+**Phụ thuộc:** E6-T02
+**Ràng buộc đặc thù:** R2",5,8,FE,FE-1,Sprint 2,Must,R2,epic:E6;type:task;role:fe;sprint-2;priority:must;constraint:haccp,Todo
+E6-T04,Task,E6,E6,Form hành động khắc phục và đóng sự cố,"Không đóng được khi thiếu hành động hoặc thời điểm (E40)
+
+**SP:** 3 · **Giờ ước lượng:** 5
+**Nguồn LAB-4:** Screen spec S5
+**Phụ thuộc:** E6-T02
+**Ràng buộc đặc thù:** R2",3,5,FE,FE-1,Sprint 3,Must,R2,epic:E6;type:task;role:fe;sprint-3;priority:must;constraint:haccp,Todo
+E6-T05,Task,E6,E6,Tra cứu truy xuất theo mã lô hoặc mã truy xuất,"Trả nhà cung cấp, lô nhập, vị trí, khách đã giao; không thấy trả E41
+
+**SP:** 3 · **Giờ ước lượng:** 6
+**Nguồn LAB-4:** Screen spec S5
+**Ràng buộc đặc thù:** R6",3,6,BE,BE-1,Sprint 3,Must,R6,epic:E6;type:task;role:be;sprint-3;priority:must;constraint:traceability,Todo
+E6-T06,Task,E6,E6,Import CSV nhiệt độ,"File lỗi dòng nào báo đúng dòng đó
+
+**SP:** 3 · **Giờ ước lượng:** 5
+**Nguồn LAB-4:** Kiến trúc mục 6.4
+**Ràng buộc đặc thù:** R2",3,5,BE,BE-2,Sprint 3,Could,R2,epic:E6;type:task;role:be;sprint-3;priority:could;constraint:haccp,Todo
+E6-T07,Task,E6,E6,"Kiểm thử HACCP: không sửa hoặc xóa, bản hiệu chỉnh","Bản ghi cũ giữ nguyên, bản hiệu chỉnh có lý do
+
+**SP:** 2 · **Giờ ước lượng:** 4
+**Nguồn LAB-4:** Screen spec S5
+**Ràng buộc đặc thù:** R2",2,4,QA,QA-1,Sprint 3,Must,R2,epic:E6;type:task;role:qa;sprint-3;priority:must;constraint:haccp,Todo
+E7,Epic,E7,,"Phân quyền, audit và bảo mật","Ma trận quyền theo vai trò LAB-1, audit thao tác nhạy cảm
+
+**SP:** 12 · **Giờ ước lượng:** 21",12,21,,,,,,epic:E7;type:epic,Todo
+E7-T01,Task,E7,E7,"audit_log cho thao tác nhạy cảm (duyệt ngoại lệ, chỉnh cấu hình, hủy lô)","Có người, thời điểm, giá trị trước và sau
+
+**SP:** 3 · **Giờ ước lượng:** 6
+**Nguồn LAB-4:** Kiến trúc mục 7
+**Phụ thuộc:** E1-T02",3,6,BE,BE-2,Sprint 2,Must,,epic:E7;type:task;role:be;sprint-2;priority:must,Todo
+E7-T02,Task,E7,E7,Ma trận quyền theo vai trò trên API và ẩn nút ở giao diện,"Mọi thao tác ghi kiểm quyền ở server
+
+**SP:** 5 · **Giờ ước lượng:** 8
+**Nguồn LAB-4:** Kiến trúc mục 7
+**Phụ thuộc:** E7-T03",5,8,BE,BE-2,Sprint 2,Must,,epic:E7;type:task;role:be;sprint-2;priority:must,Todo
+E7-T03,Task,E7,E7,Đối chiếu vai trò thiết kế với ROLE-001..008 của LAB-1,"Bảng ánh xạ vai trò được khách xác nhận
+
+**SP:** 1 · **Giờ ước lượng:** 2
+**Nguồn LAB-4:** LAB-1",1,2,QA,QA-1,Sprint 1,Must,,epic:E7;type:task;role:qa;sprint-1;priority:must,Done
+E7-T04,Task,E7,E7,"Rà soát bảo mật: quyền database, tài khoản demo, RLS","Không còn tài khoản chung ở môi trường thật
+
+**SP:** 3 · **Giờ ước lượng:** 5
+**Nguồn LAB-4:** Kiến trúc mục 7",3,5,BE,BE-1,Sprint 3,Should,,epic:E7;type:task;role:be;sprint-3;priority:should,Todo
+E8,Epic,E8,,"Kiểm thử, triển khai và tài liệu","CI, UAT theo ràng buộc đặc thù, triển khai và sao lưu
+
+**SP:** 20 · **Giờ ước lượng:** 37",20,37,,,,,,epic:E8;type:epic,Todo
+E8-T01,Task,E8,E8,"Pipeline CI: lint, test, kiểm tra ranh giới module","Vi phạm phụ thuộc module làm CI đỏ
+
+**SP:** 3 · **Giờ ước lượng:** 6
+**Nguồn LAB-4:** ADR-001
+**Phụ thuộc:** E1-T01",3,6,BE,BE-2,Sprint 1,Should,,epic:E8;type:task;role:be;sprint-1;priority:should,Todo
+E8-T02,Task,E8,E8,Kịch bản UAT với khách theo các ràng buộc đặc thù,"Khách ký xác nhận các kịch bản chính
+
+**SP:** 3 · **Giờ ước lượng:** 6
+**Nguồn LAB-4:** RFP",3,6,QA,QA-1,Sprint 4,Must,,epic:E8;type:task;role:qa;sprint-4;priority:must,Todo
+E8-T03,Task,E8,E8,"Triển khai môi trường thật, sao lưu hằng ngày, thử khôi phục","Khôi phục thử thành công; có quy trình khi dịch vụ tạm dừng
+
+**SP:** 5 · **Giờ ước lượng:** 8
+**Nguồn LAB-4:** Kiến trúc mục 8",5,8,BE,BE-1,Sprint 4,Must,,epic:E8;type:task;role:be;sprint-4;priority:must,Todo
+E8-T04,Task,E8,E8,Tài liệu vận hành và hướng dẫn người dùng,"Hướng dẫn cho 4 nhóm người dùng
+
+**SP:** 3 · **Giờ ước lượng:** 6
+**Nguồn LAB-4:** Screen spec",3,6,QA,QA-1,Sprint 4,Should,,epic:E8;type:task;role:qa;sprint-4;priority:should,Todo
+E8-T05,Task,E8,E8,Kiểm hiệu năng với vài nghìn lô (truy vấn lịch sử giao),"Xác nhận hoặc bác bỏ giả định về chi phí truy vấn ở ADR-002
+
+**SP:** 3 · **Giờ ước lượng:** 5
+**Nguồn LAB-4:** ADR-002
+**Phụ thuộc:** E4-T09
+**Ràng buộc đặc thù:** R4",3,5,QA,QA-1,Sprint 3,Should,R4,epic:E8;type:task;role:qa;sprint-3;priority:should;constraint:date-reversal,Todo
+E8-T06,Task,E8,E8,Soạn test plan và test case cho 5 ràng buộc đặc thù,"Mỗi ràng buộc có ca đạt và ca chặn
+
+**SP:** 3 · **Giờ ước lượng:** 6
+**Nguồn LAB-4:** Screen spec
+**Ràng buộc đặc thù:** R3, R4, R5, R6, R7",3,6,QA,QA-1,Sprint 1,Must,"R3, R4, R5, R6, R7",epic:E8;type:task;role:qa;sprint-1;priority:must;constraint:expiry-types;constraint:date-reversal;constraint:delivery-window;constraint:traceability;constraint:driver-hours-2024,Done
+E4-T12,Task,E4,E4,"Sắp xếp lô theo FEFO (hạn sớm trước), cùng hạn thì lô vào trước","Danh sách gợi ý đúng thứ tự FEFO; cùng hạn xếp theo thời điểm nhập
+
+**SP:** 2 · **Giờ ước lượng:** 3
+**Nguồn LAB-4:** LAB-1 F-021 bước 6, PREMISE P-11
+**Phụ thuộc:** E4-T02
+**Ràng buộc đặc thù:** R3",2,3,BE,BE-2,Sprint 2,Must,R3,epic:E4;type:task;role:be;sprint-2;priority:must;constraint:expiry-types,Todo
+E5-T13,Task,E5,E5,Kiểm quy tắc lái trung bình: tối đa 9 giờ/ngày (trung bình 2 ngày) và 44 giờ/tuần (trung bình 2 tuần),"Vượt ngưỡng trung bình chặn lưu chuyến và nêu đúng quy tắc vi phạm
+
+**SP:** 3 · **Giờ ước lượng:** 6
+**Nguồn LAB-4:** LAB-1 F-028, PREMISE P-10
+**Phụ thuộc:** E5-T02
+**Ràng buộc đặc thù:** R7",3,6,BE,BE-1,Sprint 3,Must,R7,epic:E5;type:task;role:be;sprint-3;priority:must;constraint:driver-hours-2024,Todo
+E5-T14,Task,E5,E5,Kiểm giới hạn giờ tăng ca trong năm (tối đa 960 giờ/năm),"Tăng ca lũy kế năm vượt giới hạn chặn lưu chuyến
+
+**SP:** 2 · **Giờ ước lượng:** 4
+**Nguồn LAB-4:** LAB-1 F-028, PREMISE P-10
+**Phụ thuộc:** E5-T02
+**Ràng buộc đặc thù:** R7",2,4,BE,BE-2,Sprint 3,Must,R7,epic:E5;type:task;role:be;sprint-3;priority:must;constraint:driver-hours-2024,Todo

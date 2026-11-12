@@ -1,0 +1,79 @@
+id,scope,complexity,reason
+E1-T01,3,1,"Nhiều thành phần cấu hình (repo, pipeline, hai môi trường), việc cơ học"
+E1-T02,4,3,"Chạm xác thực, cơ sở dữ liệu và middleware; vài nhánh phân quyền"
+E1-T03,3,2,Nhiều bảng danh mục nhưng cấu trúc đã rõ
+E1-T04,2,2,Một màn CRUD có vài ràng buộc bắt buộc
+E1-T05,3,1,Ba màn danh mục theo cùng mẫu
+E1-T06,2,3,Kiểm trùng hiệu lực theo ngày là logic có nhánh
+E1-T07-S1,2,2,API CRUD có khoảng hiệu lực
+E1-T07-S2,1,3,"Ngữ nghĩa NULL là chưa cấu hình, dễ sai biên"
+E1-T07-S3,2,1,Màn cấu hình theo mẫu có sẵn
+E1-T08,2,2,Dữ liệu mẫu cần có ca đảo hạn và ca NULL hợp đồng
+E1-T09,2,3,"Phải xuất danh sách cặp chưa cấu hình, nguồn dữ liệu chưa sạch"
+E1-T10,3,2,"Dùng chung mọi màn, phải khớp bộ mã lỗi E01 đến E43"
+E2-T01,3,3,"API và cơ sở dữ liệu, nhiều validation theo field"
+E2-T02-S1,1,3,So nhiệt độ với ngưỡng có hiệu lực theo ngày
+E2-T02-S2,2,3,Hai nhánh cách ly hoặc từ chối cùng ràng buộc CHECK
+E2-T02-S3,1,2,Test biên nhiệt độ
+E2-T03,2,3,"Bắt buộc có điều kiện theo loại sản phẩm, mã bò đúng 10 chữ số"
+E2-T04,3,3,"Form dài, khối xử lý xuất hiện theo điều kiện, nhiều lỗi"
+E2-T05,2,2,"Hai kiểm tra đơn giản (dải nhiệt, sức chứa)"
+E2-T06,3,2,Màn có ba hành động chuyển trạng thái
+E2-T07,3,2,Test nhiều ca biên trên luồng nhập
+E3-T01,3,4,"Máy trạng thái nhiều chuyển hợp lệ, có audit"
+E3-T02,3,2,"API lọc, phân trang, sắp xếp theo hạn"
+E3-T03,3,3,Bảng với nhãn tình trạng có thứ tự ưu tiên
+E3-T04,2,3,"Job nền theo lịch, chỉ đổi trạng thái"
+E3-T05,2,3,Hộp thoại kèm điều kiện quyền và trạng thái
+E3-T06,2,2,Test chuyển trạng thái và job
+E4-T01,3,3,"Phiếu, dòng đơn và bốn trạng thái, có nhánh business review"
+E4-T02,1,1,Một điều kiện trạng thái lô
+E4-T03,2,3,"Hai nhánh theo loại hạn, một nhánh cần ngoại lệ"
+E4-T04-S1,2,3,"Truy vấn theo cặp khách × SKU, thứ tự thời điểm giao"
+E4-T04-S2,1,3,So sánh hạn và trả đúng lỗi
+E4-T04-S3,1,2,Unit test biên
+E4-T05-S1,2,4,"Khóa advisory trong transaction, dễ sai khi đồng thời"
+E4-T05-S2,2,3,Kiểm lại toàn bộ sau khi khóa
+E4-T05-S3,1,3,Test hai phiên song song khó tái hiện
+E4-T06-S1,1,3,Tính hạn giao theo tỷ lệ từ ngày sản xuất và hạn
+E4-T06-S2,2,3,Nhánh chỉ theo nhãn và NULL chuyển business review
+E4-T06-S3,1,2,Unit test
+E4-T07,1,2,Một điều kiện truy xuất có điều kiện theo loại
+E4-T08,2,3,"Lưu lý do theo bước, nhiều mã lý do"
+E4-T09,3,3,"Lịch sử bất biến, chỉ mục và quyền chặn sửa"
+E4-T10,3,4,"Màn nhiều trạng thái lô, mỗi lô một lý do chặn"
+E4-T11,4,3,Bộ test cắt ngang nhiều bước kiểm lô
+E4-T12,1,2,Sắp xếp hai khóa
+E5-T12,2,2,"Làm rõ tham số, chủ yếu trao đổi và ghi biên bản"
+E5-T01,3,2,"Bốn bảng và migration, cấu trúc rõ"
+E5-T02,3,3,Bảng tham số có hiệu lực cùng màn quản trị
+E5-T03,2,3,Tính giờ từ nhiều thành phần kể cả nghỉ chèn
+E5-T04,2,3,"Giờ bị ràng buộc trong ngày, có mức tối đa 15 giờ"
+E5-T05,1,3,"Nghỉ giữa hai ca, có thể qua ngày"
+E5-T06,2,4,"Chèn nghỉ làm đổi giờ kết thúc, dễ sai biên"
+E5-T07,3,3,"Lũy kế nhiều chuyến, qua ranh giới tháng"
+E5-T08,2,3,Kiểm xe đúng dải và không trùng chuyến
+E5-T09,3,4,Màn có biểu đồ giờ và lỗi theo từng quy tắc
+E5-T10-S1,2,3,Gợi ý đổi tài xế phải kiểm lại các quy tắc giờ lái
+E5-T10-S2,2,3,Gợi ý cắt điểm giao hoặc dời giờ
+E5-T10-S3,1,2,Hiển thị gợi ý trên giao diện
+E5-T11,3,4,"Ca biên giờ lái: qua nửa đêm, nhiều chuyến một ngày"
+E5-T13,2,4,Trung bình trượt trên cửa sổ nhiều ngày
+E5-T14,1,3,Lũy kế giờ tăng ca trong năm
+E6-T01,3,4,"Bảng chỉ thêm, chặn sửa và xóa ở cơ sở dữ liệu"
+E6-T02,2,3,Tự mở sự cố khi vượt ngưỡng hiệu lực
+E6-T03,3,3,Màn danh sách và form ghi nhiệt độ
+E6-T04,2,3,Điều kiện đóng sự cố và quyền
+E6-T05,3,3,"Tra cứu qua lô, nhập, vị trí và khách đã giao"
+E6-T06,2,3,Import có báo lỗi theo dòng
+E6-T07,2,2,Test chặn sửa và bản hiệu chỉnh
+E7-T01,3,2,"Ghi audit ở nhiều thao tác, cấu trúc cố định"
+E7-T02,4,3,Kiểm quyền ở API và giao diện cho mọi chức năng
+E7-T03,1,1,Bảng ánh xạ vai trò
+E7-T04,3,2,"Rà soát theo danh sách, không có logic mới"
+E8-T01,2,3,Kiểm tra ranh giới module trong CI
+E8-T02,3,2,Kịch bản UAT trên nhiều chức năng
+E8-T03,3,4,"Môi trường thật, sao lưu và thử khôi phục"
+E8-T04,3,2,Tài liệu cho bốn nhóm người dùng
+E8-T05,2,3,Đo hiệu năng truy vấn lịch sử giao
+E8-T06,3,2,Test case cho năm nhóm ràng buộc
